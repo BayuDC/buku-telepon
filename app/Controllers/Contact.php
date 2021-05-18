@@ -10,12 +10,17 @@ class Contact extends BaseController {
 		$this->contactModel = new ContactModel();
 	}
 	public function index() {
-		$contacts = $this->contactModel->findAll();
 		return view('home', [
 			'title' => 'Buku Telepon',
-			'contacts' => $contacts
+			'contacts' => $this->contactModel->getContact()
 		]);
 	}
 	public function add() {
+	}
+	public function detail($id) {
+		return view('detail', [
+			'title' => 'Detail Kontak',
+			'contact' => $this->contactModel->getContact($id)
+		]);
 	}
 }
