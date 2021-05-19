@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ContactModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Contact extends BaseController {
 	private $contactModel;
@@ -18,9 +19,16 @@ class Contact extends BaseController {
 	public function add() {
 	}
 	public function detail($id) {
+		$contact = $this->contactModel->getContact($id);
+		if ($id == 0 || !$contact) {
+			return $this->notFound();
+		}
 		return view('detail', [
 			'title' => 'Detail Kontak',
-			'contact' => $this->contactModel->getContact($id)
+			'contact' => $contact
 		]);
+	}
+	public function notFound() {
+		throw new PageNotFoundException('Kontak tidak ditemukan');
 	}
 }
