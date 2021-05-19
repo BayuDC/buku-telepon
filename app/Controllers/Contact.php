@@ -21,14 +21,11 @@ class Contact extends BaseController {
 	public function detail($id) {
 		$contact = $this->contactModel->getContact($id);
 		if ($id == 0 || !$contact) {
-			return $this->notFound();
+			throw new PageNotFoundException('Kontak tidak ditemukan');
 		}
 		return view('detail', [
 			'title' => 'Detail Kontak',
 			'contact' => $contact
 		]);
-	}
-	public function notFound() {
-		throw new PageNotFoundException('Kontak tidak ditemukan');
 	}
 }
