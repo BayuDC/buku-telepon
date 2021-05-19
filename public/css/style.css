@@ -1,3 +1,6 @@
+body {
+    min-width: 280px;
+}
 .img-medium {
     width: 150px;
     height: 150px;

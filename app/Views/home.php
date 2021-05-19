@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
 <div class="uk-container uk-container-small">
-    <table class="uk-table uk-table-divider uk-table-small">
+    <table class="uk-table uk-table-divider uk-table-small uk-table-responsive">
         <thead>
             <tr>
                 <th class="uk-table-shrink">No</th>
@@ -12,7 +12,7 @@
         <tbody>
             <?php foreach ($contacts as $index => $contact) : ?>
                 <tr>
-                    <td><?= $index + 1 ?></td>
+                    <td class="uk-visible@m"><?= $index + 1 ?></td>
                     <td><a href="/contact/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['name'] ?></a></td>
                     <td><a href="/contact/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['phone'] ?></a></td>
                 </tr>
