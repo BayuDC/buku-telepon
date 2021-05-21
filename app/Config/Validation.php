@@ -6,9 +6,9 @@ use CodeIgniter\Validation\CreditCardRules;
 use CodeIgniter\Validation\FileRules;
 use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
+use App\Validation\MyRules;
 
-class Validation
-{
+class Validation {
 	//--------------------------------------------------------------------
 	// Setup
 	//--------------------------------------------------------------------
@@ -24,6 +24,7 @@ class Validation
 		FormatRules::class,
 		FileRules::class,
 		CreditCardRules::class,
+		MyRules::class
 	];
 
 	/**
@@ -40,4 +41,30 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+	public $contactAdd = [
+		'name' => [
+			'rules' => 'required',
+			'errors' => [
+				'required' => 'Nama tidak boleh kosong',
+			]
+		],
+		'phone' => [
+			'rules' => 'required|is_unique[contacts.phone]|valid_phone_number',
+			'errors' => [
+				'required' => 'Nomor telepon tidak boleh kosong',
+				'is_unique' => 'Nomor telepon sudah terdaftar',
+				'valid_phone_number' => 'Nomor telepon tidak valid'
+			]
+		],
+		'email' => [
+			'rules' => "permit_empty|is_unique[contacts.email]|valid_email",
+			'errors' => [
+				'is_unique' => 'Email sudah terdaftar',
+				'valid_email' => 'Email tidak valid'
+			]
+		],
+		'address' => [
+			'rules' => 'permit_empty'
+		]
+	];
 }

@@ -1,6 +1,12 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
 <div class="uk-container uk-container-xsmall">
+    <?php if (session()->getFlashData('message')) : ?>
+        <div class="uk-alert-primary" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p><?= session()->getFlashData('message') ?></p>
+        </div>
+    <?php endif ?>
     <div class="uk-card uk-card-default">
         <div class="uk-card-header uk-padding-small">
             <div class="uk-margin-small-top">
@@ -28,7 +34,7 @@
             <div class="uk-flex uk-flex-column flex-row-s">
                 <a class="uk-button uk-button-primary margin-right-s">Edit</a>
                 <a class="uk-button uk-button-danger">Hapus</a>
-                <a href="/" class="uk-button uk-button-default uk-flex-first@s uk-margin-auto-right@s">Kembali</a>
+                <a href="<?= session()->getFlashData('message') ? '/new' : '/' ?>" class="uk-button uk-button-default uk-flex-first@s uk-margin-auto-right@s">Kembali</a>
             </div>
         </div>
     </div>

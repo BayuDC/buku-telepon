@@ -21,7 +21,7 @@
     </table>
 </div>
 <div class="uk-position-fixed uk-position-bottom-right uk-position-small">
-    <a class="uk-button uk-button-primary" href="/add">
+    <a class="uk-button uk-button-primary" href="/new">
         Tambah Kontak
     </a>
 </div>

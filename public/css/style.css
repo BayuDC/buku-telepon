@@ -5,6 +5,13 @@ body {
     width: 150px;
     height: 150px;
 }
+.uk-input ~ .uk-alert-danger {
+    display: none;
+}
+.uk-form-danger ~ .uk-alert-danger {
+    display: inherit;
+    padding: 10px;
+}
 @media screen and (min-width: 640px) {
     .flex-row-s {
         flex-direction: row;

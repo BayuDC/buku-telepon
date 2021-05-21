@@ -23,15 +23,18 @@ class Contact extends Migration {
 			],
 			'email' => [
 				'type' => 'VARCHAR',
-				'constraint' => 255
+				'constraint' => 255,
+				'null' => true
 			],
 			'address' => [
 				'type' => 'VARCHAR',
-				'constraint' => 255
+				'constraint' => 255,
+				'null' => true
 			],
 			'picture' => [
 				'type' => 'VARCHAR',
-				'constraint' => 255
+				'constraint' => 255,
+				'null' => true
 			],
 			'created_at' => [
 				'type' => 'DATETIME',
