@@ -1,6 +1,12 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
-<div class="uk-container uk-container-small">
+<div class="uk-container uk-container-xsmall">
+    <?php if (session()->getFlashData('message')) : ?>
+        <div class="uk-alert-<?= session()->getFlashData('success') ? 'primary' : 'danger' ?>" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p><?= session()->getFlashData('message') ?></p>
+        </div>
+    <?php endif ?>
     <table class="uk-table uk-table-divider uk-table-small uk-table-responsive">
         <thead>
             <tr>

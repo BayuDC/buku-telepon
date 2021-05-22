@@ -56,6 +56,19 @@ class Contact extends BaseController {
 		$id = $this->contactModel->getLastId();
 		return redirect()->to('/contact/' . $id)->with('message', 'Kontak berhasil ditambahkan');
 	}
+	public function delete() {
+		$id = $this->request->getPost('id');
+		$this->contactModel->delete($id);
+
+		$success = $this->contactModel->db->affectedRows() > 0;
+		$message = 'Kontak berhasil dihapus';
+		if (!$success) {
+			$message = 'Kontak gagal dihapus';
+		}
+		return redirect()->to('/')
+			->with('success', $success)
+			->with('message', $message);
+	}
 	private function valid($rule) {
 		return Services::validation()->run($this->request->getPost(), $rule);
 	}

@@ -33,8 +33,31 @@
         <div class="uk-card-footer uk-padding-small">
             <div class="uk-flex uk-flex-column flex-row-s">
                 <a class="uk-button uk-button-primary margin-right-s">Edit</a>
-                <a class="uk-button uk-button-danger">Hapus</a>
+                <a href="#modal-delete" class="uk-button uk-button-danger" uk-toggle>Hapus</a>
                 <a href="<?= session()->getFlashData('message') ? '/new' : '/' ?>" class="uk-button uk-button-default uk-flex-first@s uk-margin-auto-right@s">Kembali</a>
+                <div id="modal-delete" uk-modal>
+                    <div class="uk-modal-dialog uk-margin-auto-vertical uk-width-large">
+                        <div class="uk-card uk-card-default uk-card-body uk-text-center">
+                            <h3 class="uk-card-title uk-margin-small-bottom">Hapus Kontak?</h3>
+                            <p class="uk-margin-remove-bottom uk-margin-small-top uk-text-emphasis">
+                                <?= $contact['name'] ?>
+                            </p>
+                            <p class="uk-margin-remove">
+                                <?= $contact['phone'] ?>
+                            </p>
+                        </div>
+                        <form action="/contact" method="post">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="id" value="<?= $contact['id'] ?>">
+
+                            <div class="uk-modal-footer uk-padding-small uk-flex uk-flex-column flex-row-s">
+                                <button class="uk-button uk-button-danger uk-margin-auto-left@s" type="submit">Hapus</button>
+                                <button class="uk-button uk-button-default uk-modal-close uk-flex-first@s" type="button">Batal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

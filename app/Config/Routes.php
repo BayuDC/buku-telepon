@@ -35,6 +35,7 @@ $routes->get('/', 'Contact::index');
 $routes->get('/contact/(:num)', 'Contact::detail/$1');
 $routes->get('/new', 'Contact::add');
 $routes->post('/save', 'Contact::save');
+$routes->delete('/contact', 'Contact::delete');
 $routes->addRedirect('/(:any)', '/');
 
 /*
