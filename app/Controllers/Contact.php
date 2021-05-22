@@ -7,6 +7,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use Config\Services;
 
 class Contact extends BaseController {
+	protected $helpers = ['contact'];
 	private $contactModel;
 	public function __construct() {
 		$this->contactModel = new ContactModel();
@@ -22,8 +23,8 @@ class Contact extends BaseController {
 		if ($id == 0 || !$contact) {
 			throw new PageNotFoundException('Kontak tidak ditemukan');
 		}
-		$contact['email'] = $this->emptyText($contact['email']);
-		$contact['address'] = $this->emptyText($contact['address']);
+		$contact['email'] = emptyText($contact['email']);
+		$contact['address'] = emptyText($contact['address']);
 		$contact['picture'] = $contact['picture'] == null ? 'default.jpg' : $contact['picture'];
 		return view('detail', [
 			'title' => 'Detail Kontak',
@@ -44,9 +45,9 @@ class Contact extends BaseController {
 		$contact = $this->request->getPost();
 		$success = $this->contactModel->save([
 			'name' => $contact['name'],
-			'phone' => $this->clear($contact['phone']),
-			'email' => $this->emptyValue($contact['email']),
-			'address' => $this->emptyValue($contact['address']),
+			'phone' => clear($contact['phone']),
+			'email' => emptyValue($contact['email']),
+			'address' => emptyValue($contact['address']),
 		]);
 
 		if (!$success) {
@@ -57,14 +58,5 @@ class Contact extends BaseController {
 	}
 	private function valid($rule) {
 		return Services::validation()->run($this->request->getPost(), $rule);
-	}
-	private function emptyValue($str) {
-		return $str == '' ? null : $str;
-	}
-	private function emptyText($str) {
-		return $str == null ? 'Belum diatur' : $str;
-	}
-	private function clear($str) {
-		return preg_replace('/\s+/', '', $str);
 	}
 }
