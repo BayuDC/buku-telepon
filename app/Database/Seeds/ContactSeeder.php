@@ -14,7 +14,7 @@ class ContactSeeder extends Seeder {
 				'phone' => $faker->phoneNumber(),
 				'email' => $faker->email(),
 				'address' => $faker->address(),
-				'picture' => 'default.jpg',
+				'picture' => null,
 				'created_at' => Time::now(),
 				'updated_at' => Time::now()
 			]);

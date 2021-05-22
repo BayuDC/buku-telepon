@@ -22,8 +22,9 @@ class Contact extends BaseController {
 		if ($id == 0 || !$contact) {
 			throw new PageNotFoundException('Kontak tidak ditemukan');
 		}
-		$contact['email'] = $this->notSetInverse($contact['email']);
-		$contact['address'] = $this->notSetInverse($contact['address']);
+		$contact['email'] = $this->emptyText($contact['email']);
+		$contact['address'] = $this->emptyText($contact['address']);
+		$contact['picture'] = $contact['picture'] == null ? 'default.jpg' : $contact['picture'];
 		return view('detail', [
 			'title' => 'Detail Kontak',
 			'contact' => $contact
@@ -44,9 +45,8 @@ class Contact extends BaseController {
 		$success = $this->contactModel->save([
 			'name' => $contact['name'],
 			'phone' => $this->clear($contact['phone']),
-			'email' => $this->notSet($contact['email']),
-			'address' => $this->notSet($contact['address']),
-			'picture' => 'default.jpg'
+			'email' => $this->emptyValue($contact['email']),
+			'address' => $this->emptyValue($contact['address']),
 		]);
 
 		if (!$success) {
@@ -58,10 +58,10 @@ class Contact extends BaseController {
 	private function valid($rule) {
 		return Services::validation()->run($this->request->getPost(), $rule);
 	}
-	private function notSet($str) {
+	private function emptyValue($str) {
 		return $str == '' ? null : $str;
 	}
-	private function notSetInverse($str) {
+	private function emptyText($str) {
 		return $str == null ? 'Belum diatur' : $str;
 	}
 	private function clear($str) {
