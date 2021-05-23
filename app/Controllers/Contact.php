@@ -7,7 +7,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use Config\Services;
 
 class Contact extends BaseController {
-	protected $helpers = ['contact'];
+	protected $helpers = ['contact', 'form'];
 	private $contactModel;
 	public function __construct() {
 		$this->contactModel = new ContactModel();
@@ -47,16 +47,16 @@ class Contact extends BaseController {
 		]);
 	}
 	public function save() {
-		if (!$this->valid('contact_new')) {
+		if (!validator($this->request->getPost(), 'contact_new')) {
 			return redirect()->back()->withInput();
 		}
 
-		$contact = $this->request->getPost();
+		$contact = clear($this->request->getPost());
 		$success = $this->contactModel->save([
 			'name' => $contact['name'],
-			'phone' => clear($contact['phone']),
+			'phone' => removeSpace($contact['phone']),
 			'email' => emptyValue($contact['email']),
-			'address' => emptyValue($contact['address']),
+			'address' => emptyValue($contact['address'])
 		]);
 
 		if (!$success) {
@@ -66,17 +66,17 @@ class Contact extends BaseController {
 		return redirect()->to('/contact/' . $id)->with('alert', getAlert('Kontak berhasil ditambahkan'))->with('from', '/new');
 	}
 	public function update($id) {
-		if (!$this->valid('contact_update')) {
+		if (!validator($this->request->getPost(), 'contact_update')) {
 			return redirect()->back()->withInput();
 		}
 
-		$contact = $this->request->getPost();
+		$contact = clear($this->request->getPost());
 		$success = $this->contactModel->save([
 			'id' => $id,
 			'name' => $contact['name'],
-			'phone' => clear($contact['phone']),
+			'phone' => removeSpace($contact['phone']),
 			'email' => emptyValue($contact['email']),
-			'address' => emptyValue($contact['address']),
+			'address' => emptyValue($contact['address'])
 		]);
 
 		if (!$success) {
@@ -92,8 +92,5 @@ class Contact extends BaseController {
 			return redirect()->to('/')->with('alert', getAlert('Kontak gagal dihapus', true));
 		}
 		return redirect()->to('/')->with('alert', getAlert('Kontak berhasil dihapus'));
-	}
-	private function valid($rule) {
-		return Services::validation()->run($this->request->getPost(), $rule);
 	}
 }
