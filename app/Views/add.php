@@ -3,10 +3,10 @@
 <div class="uk-container uk-container-xsmall">
     <?= $this->include('layout/alert') ?>
     <div class="uk-card uk-card-default">
-        <div class="uk-card-body">
-            <h3 class="uk-card-title">Tambah Kontak</h3>
-            <form action="/save" method="post" class="uk-form-horizontal">
-                <?= csrf_field() ?>
+        <form action="/save" method="post" class="uk-form-horizontal">
+            <?= csrf_field() ?>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">Tambah Kontak</h3>
                 <div>
                     <label class="uk-form-label" for="name">Nama</label>
                     <div class="uk-form-controls">
@@ -51,14 +51,14 @@
                         </div>
                     </div>
                 </div>
-        </div>
-        <div class="uk-card-footer uk-padding-small">
-            <div class="uk-flex uk-flex-column flex-row-s">
-                <button type="submit" class="uk-button uk-button-primary">Simpan</button>
-                <a href="/" class="uk-button uk-button-danger uk-flex-first@s uk-margin-auto-right@s">Batal</a>
             </div>
-            </form>
-        </div>
+            <div class="uk-card-footer uk-padding-small">
+                <div class="uk-flex uk-flex-column flex-row-s">
+                    <button type="submit" class="uk-button uk-button-primary">Simpan</button>
+                    <a href="/" class="uk-button uk-button-danger uk-flex-first@s uk-margin-auto-right@s">Batal</a>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <?= $this->endSection() ?>

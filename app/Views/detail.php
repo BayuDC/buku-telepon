@@ -27,7 +27,7 @@
         </div>
         <div class="uk-card-footer uk-padding-small">
             <div class="uk-flex uk-flex-column flex-row-s">
-                <a href="/edit/<?= $contact['id'] ?>" class="uk-button uk-button-primary margin-right-s">Edit</a>
+                <a href="/<?= $contact['id'] ?>/edit" class="uk-button uk-button-primary margin-right-s">Edit</a>
                 <a href="#modal-delete" class="uk-button uk-button-danger" uk-toggle>Hapus</a>
                 <a href="<?= $from ? $from : '/' ?>" class="uk-button uk-button-default uk-flex-first@s uk-margin-auto-right@s">Kembali</a>
                 <div id="modal-delete" uk-modal>
@@ -41,7 +41,7 @@
                                 <?= $contact['phone'] ?>
                             </p>
                         </div>
-                        <form action="/contact" method="post">
+                        <form action="/delete" method="post">
                             <?= csrf_field() ?>
                             <input type="hidden" name="_method" value="delete">
                             <input type="hidden" name="id" value="<?= $contact['id'] ?>">

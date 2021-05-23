@@ -14,8 +14,8 @@
             <?php foreach ($contacts as $index => $contact) : ?>
                 <tr>
                     <td class="uk-visible@m"><?= $index + 1 ?></td>
-                    <td><a href="/contact/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['name'] ?></a></td>
-                    <td><a href="/contact/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['phone'] ?></a></td>
+                    <td><a href="/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['name'] ?></a></td>
+                    <td><a href="/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['phone'] ?></a></td>
                 </tr>
             <?php endforeach ?>
         </tbody>

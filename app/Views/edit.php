@@ -3,7 +3,7 @@
 <div class="uk-container uk-container-xsmall">
     <?= $this->include('layout/alert') ?>
     <div class="uk-card uk-card-default">
-        <form action="/update/<?= $contact['id'] ?>" method="post" class="uk-form-horizontal">
+        <form action="/update" method="post" class="uk-form-horizontal">
             <?= csrf_field() ?>
             <input type="hidden" name="_method" value="patch">
             <input type="hidden" name="id" value="<?= $contact['id'] ?>">
@@ -57,7 +57,7 @@
             <div class="uk-card-footer uk-padding-small">
                 <div class="uk-flex uk-flex-column flex-row-s">
                     <button type="submit" class="uk-button uk-button-primary">Simpan</button>
-                    <a href="/contact/<?= $contact['id'] ?>" class="uk-button uk-button-danger uk-flex-first@s uk-margin-auto-right@s">Batal</a>
+                    <a href="/<?= $contact['id'] ?>" class="uk-button uk-button-danger uk-flex-first@s uk-margin-auto-right@s">Batal</a>
                 </div>
             </div>
         </form>

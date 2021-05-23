@@ -48,7 +48,7 @@ class Contact extends BaseController {
 	}
 	public function save() {
 		if (!validator($this->request->getPost(), 'contact_new')) {
-			return redirect()->back()->withInput();
+			return redirect()->to('/new')->withInput();
 		}
 
 		$contact = clear($this->request->getPost());
@@ -60,14 +60,15 @@ class Contact extends BaseController {
 		]);
 
 		if (!$success) {
-			return redirect()->back()->withInput()->with('alert', getAlert('Kontak gagal ditambahkan', true));
+			return redirect()->to('/new')->withInput()->with('alert', getAlert('Kontak gagal ditambahkan', true));
 		}
 		$id = $this->contactModel->getLastId();
-		return redirect()->to('/contact/' . $id)->with('alert', getAlert('Kontak berhasil ditambahkan'))->with('from', '/new');
+		return redirect()->to('/' . $id)->with('alert', getAlert('Kontak berhasil ditambahkan'))->with('from', '/new');
 	}
-	public function update($id) {
+	public function update() {
+		$id = $this->request->getPost('id');
 		if (!validator($this->request->getPost(), 'contact_update')) {
-			return redirect()->back()->withInput();
+			return redirect()->to("/$id/edit")->withInput();
 		}
 
 		$contact = clear($this->request->getPost());
@@ -80,9 +81,9 @@ class Contact extends BaseController {
 		]);
 
 		if (!$success) {
-			return redirect()->back()->withInput()->with('alert', getAlert('Kontak gagal diperbarui', true));
+			return redirect()->to("/$id/edit")->withInput()->with('alert', getAlert('Kontak gagal diperbarui', true));
 		}
-		return redirect()->to('/contact/' . $id)->with('alert', getAlert('Kontak berhasil diperbarui'));
+		return redirect()->to('/' . $id)->with('alert', getAlert('Kontak berhasil diperbarui'));
 	}
 	public function delete() {
 		$id = $this->request->getPost('id');
