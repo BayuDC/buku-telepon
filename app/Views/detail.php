@@ -32,7 +32,7 @@
         </div>
         <div class="uk-card-footer uk-padding-small">
             <div class="uk-flex uk-flex-column flex-row-s">
-                <a class="uk-button uk-button-primary margin-right-s">Edit</a>
+                <a href="/edit/<?= $contact['id'] ?>" class="uk-button uk-button-primary margin-right-s">Edit</a>
                 <a href="#modal-delete" class="uk-button uk-button-danger" uk-toggle>Hapus</a>
                 <a href="<?= $flash ? '/new' : '/' ?>" class="uk-button uk-button-default uk-flex-first@s uk-margin-auto-right@s">Kembali</a>
                 <div id="modal-delete" uk-modal>

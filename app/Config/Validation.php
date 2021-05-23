@@ -41,7 +41,7 @@ class Validation {
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
-	public $contactAdd = [
+	public $contact_new = [
 		'name' => [
 			'rules' => 'required',
 			'errors' => [
@@ -58,6 +58,32 @@ class Validation {
 		],
 		'email' => [
 			'rules' => "permit_empty|is_unique[contacts.email]|valid_email",
+			'errors' => [
+				'is_unique' => 'Email sudah terdaftar',
+				'valid_email' => 'Email tidak valid'
+			]
+		],
+		'address' => [
+			'rules' => 'permit_empty'
+		]
+	];
+	public $contact_update = [
+		'name' => [
+			'rules' => 'required',
+			'errors' => [
+				'required' => 'Nama tidak boleh kosong',
+			]
+		],
+		'phone' => [
+			'rules' => 'required|is_unique[contacts.phone,id,{id}]|valid_phone_number',
+			'errors' => [
+				'required' => 'Nomor telepon tidak boleh kosong',
+				'is_unique' => 'Nomor telepon sudah terdaftar',
+				'valid_phone_number' => 'Nomor telepon tidak valid'
+			]
+		],
+		'email' => [
+			'rules' => "permit_empty|is_unique[contacts.email,id,{id}]|valid_email",
 			'errors' => [
 				'is_unique' => 'Email sudah terdaftar',
 				'valid_email' => 'Email tidak valid'

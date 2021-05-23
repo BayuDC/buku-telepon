@@ -40,8 +40,17 @@ class Contact extends BaseController {
 			'flash' => session()->getFlashData()
 		]);
 	}
+	public function edit($id) {
+		$contact = $this->contactModel->getContact($id);
+		return view('edit', [
+			'title' => 'Edit Kontak',
+			'contact' => $contact,
+			'validation' => Services::validation(),
+			'flash' => session()->getFlashData()
+		]);
+	}
 	public function save() {
-		if (!$this->valid('contactAdd')) {
+		if (!$this->valid('contact_new')) {
 			return redirect()->back()->withInput();
 		}
 
@@ -58,6 +67,25 @@ class Contact extends BaseController {
 		}
 		$id = $this->contactModel->getLastId();
 		return redirect()->to('/contact/' . $id)->with('message', 'Kontak berhasil ditambahkan');
+	}
+	public function update($id) {
+		if (!$this->valid('contact_update')) {
+			return redirect()->back()->withInput();
+		}
+
+		$contact = $this->request->getPost();
+		$success = $this->contactModel->save([
+			'id' => $id,
+			'name' => $contact['name'],
+			'phone' => clear($contact['phone']),
+			'email' => emptyValue($contact['email']),
+			'address' => emptyValue($contact['address']),
+		]);
+
+		if (!$success) {
+			return redirect()->back()->withInput()->with('message', 'Kontak gagal diperbarui');
+		}
+		return redirect()->to('/contact/' . $id)->with('message', 'Kontak berhasil diperbarui');
 	}
 	public function delete() {
 		$id = $this->request->getPost('id');
