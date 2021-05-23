@@ -1,10 +1,10 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
 <div class="uk-container uk-container-xsmall">
-    <?php if ($flash) : ?>
+    <?php if ($message) : ?>
         <div class="uk-alert-primary" uk-alert>
             <a class="uk-alert-close" uk-close></a>
-            <p><?= $flash['message'] ?></p>
+            <p><?= $message ?></p>
         </div>
     <?php endif ?>
     <div class="uk-card uk-card-default">
@@ -34,7 +34,7 @@
             <div class="uk-flex uk-flex-column flex-row-s">
                 <a href="/edit/<?= $contact['id'] ?>" class="uk-button uk-button-primary margin-right-s">Edit</a>
                 <a href="#modal-delete" class="uk-button uk-button-danger" uk-toggle>Hapus</a>
-                <a href="<?= $flash ? '/new' : '/' ?>" class="uk-button uk-button-default uk-flex-first@s uk-margin-auto-right@s">Kembali</a>
+                <a href="<?= $from ? $from : '/' ?>" class="uk-button uk-button-default uk-flex-first@s uk-margin-auto-right@s">Kembali</a>
                 <div id="modal-delete" uk-modal>
                     <div class="uk-modal-dialog uk-margin-auto-vertical uk-width-large">
                         <div class="uk-card uk-card-default uk-card-body uk-text-center">

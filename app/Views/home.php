@@ -1,10 +1,10 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
 <div class="uk-container uk-container-xsmall">
-    <?php if ($flash) : ?>
-        <div class="uk-alert-<?= $flash['success'] ? 'primary' : 'danger' ?>" uk-alert>
+    <?php if ($message) : ?>
+        <div class="uk-alert-<?= $success ? 'primary' : 'danger' ?>" uk-alert>
             <a class="uk-alert-close" uk-close></a>
-            <p><?= $flash['message'] ?></p>
+            <p><?= $message ?></p>
         </div>
     <?php endif ?>
     <table class="uk-table uk-table-divider uk-table-small uk-table-responsive">

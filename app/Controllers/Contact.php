@@ -16,7 +16,8 @@ class Contact extends BaseController {
 		return view('home', [
 			'title' => 'Buku Telepon',
 			'contacts' => $this->contactModel->getContact(),
-			'flash' => session()->getFlashData()
+			'success' => session()->getFlashData('success'),
+			'message' => session()->getFlashData('message')
 		]);
 	}
 	public function detail($id) {
@@ -30,14 +31,15 @@ class Contact extends BaseController {
 		return view('detail', [
 			'title' => 'Detail Kontak',
 			'contact' => $contact,
-			'flash' => session()->getFlashData()
+			'message' => session()->getFlashData('message'),
+			'from' => session()->getFlashData('from')
 		]);
 	}
 	public function add() {
 		return view('add', [
 			'title' => 'Tambah Kontak',
 			'validation' => Services::validation(),
-			'flash' => session()->getFlashData()
+			'message' => session()->getFlashData('message')
 		]);
 	}
 	public function edit($id) {
@@ -46,7 +48,7 @@ class Contact extends BaseController {
 			'title' => 'Edit Kontak',
 			'contact' => $contact,
 			'validation' => Services::validation(),
-			'flash' => session()->getFlashData()
+			'message' => session()->getFlashData('message')
 		]);
 	}
 	public function save() {
@@ -66,7 +68,9 @@ class Contact extends BaseController {
 			return redirect()->back()->withInput()->with('message', 'Kontak gagal ditambahkan');
 		}
 		$id = $this->contactModel->getLastId();
-		return redirect()->to('/contact/' . $id)->with('message', 'Kontak berhasil ditambahkan');
+		return redirect()->to('/contact/' . $id)
+			->with('message', 'Kontak berhasil ditambahkan')
+			->with('from', '/new');
 	}
 	public function update($id) {
 		if (!$this->valid('contact_update')) {
