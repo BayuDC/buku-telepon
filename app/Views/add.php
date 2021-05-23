@@ -1,10 +1,10 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
 <div class="uk-container uk-container-xsmall">
-    <?php if (session()->getFlashData('message')) : ?>
+    <?php if ($flash) : ?>
         <div class="uk-alert-danger" uk-alert>
             <a class="uk-alert-close" uk-close></a>
-            <p><?= session()->getFlashData('message') ?></p>
+            <p><?= $flash['message'] ?></p>
         </div>
     <?php endif ?>
     <div class="uk-card uk-card-default">

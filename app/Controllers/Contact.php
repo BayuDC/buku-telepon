@@ -15,7 +15,8 @@ class Contact extends BaseController {
 	public function index() {
 		return view('home', [
 			'title' => 'Buku Telepon',
-			'contacts' => $this->contactModel->getContact()
+			'contacts' => $this->contactModel->getContact(),
+			'flash' => session()->getFlashData()
 		]);
 	}
 	public function detail($id) {
@@ -28,13 +29,15 @@ class Contact extends BaseController {
 		$contact['picture'] = $contact['picture'] == null ? 'default.jpg' : $contact['picture'];
 		return view('detail', [
 			'title' => 'Detail Kontak',
-			'contact' => $contact
+			'contact' => $contact,
+			'flash' => session()->getFlashData()
 		]);
 	}
 	public function add() {
 		return view('add', [
 			'title' => 'Tambah Kontak',
-			'validation' => Services::validation()
+			'validation' => Services::validation(),
+			'flash' => session()->getFlashData()
 		]);
 	}
 	public function save() {
