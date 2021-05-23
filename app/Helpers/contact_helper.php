@@ -9,3 +9,9 @@ function emptyText($str) {
 function clear($str) {
     return preg_replace('/\s+/', '', $str);
 }
+function getAlert($message, $error = false) {
+    return [
+        'message' => $message,
+        'error' => $error
+    ];
+}

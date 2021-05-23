@@ -1,12 +1,7 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
 <div class="uk-container uk-container-xsmall">
-    <?php if ($message) : ?>
-        <div class="uk-alert-<?= $success ? 'primary' : 'danger' ?>" uk-alert>
-            <a class="uk-alert-close" uk-close></a>
-            <p><?= $message ?></p>
-        </div>
-    <?php endif ?>
+    <?= $this->include('layout/alert') ?>
     <table class="uk-table uk-table-divider uk-table-small uk-table-responsive">
         <thead>
             <tr>

@@ -16,8 +16,6 @@ class Contact extends BaseController {
 		return view('home', [
 			'title' => 'Buku Telepon',
 			'contacts' => $this->contactModel->getContact(),
-			'success' => session()->getFlashData('success'),
-			'message' => session()->getFlashData('message')
 		]);
 	}
 	public function detail($id) {
@@ -31,15 +29,13 @@ class Contact extends BaseController {
 		return view('detail', [
 			'title' => 'Detail Kontak',
 			'contact' => $contact,
-			'message' => session()->getFlashData('message'),
-			'from' => session()->getFlashData('from')
+			'from' => session()->getFlashData('from'),
 		]);
 	}
 	public function add() {
 		return view('add', [
 			'title' => 'Tambah Kontak',
 			'validation' => Services::validation(),
-			'message' => session()->getFlashData('message')
 		]);
 	}
 	public function edit($id) {
@@ -48,7 +44,6 @@ class Contact extends BaseController {
 			'title' => 'Edit Kontak',
 			'contact' => $contact,
 			'validation' => Services::validation(),
-			'message' => session()->getFlashData('message')
 		]);
 	}
 	public function save() {
@@ -65,12 +60,10 @@ class Contact extends BaseController {
 		]);
 
 		if (!$success) {
-			return redirect()->back()->withInput()->with('message', 'Kontak gagal ditambahkan');
+			return redirect()->back()->withInput()->with('alert', getAlert('Kontak gagal ditambahkan', true));
 		}
 		$id = $this->contactModel->getLastId();
-		return redirect()->to('/contact/' . $id)
-			->with('message', 'Kontak berhasil ditambahkan')
-			->with('from', '/new');
+		return redirect()->to('/contact/' . $id)->with('alert', getAlert('Kontak berhasil ditambahkan'))->with('from', '/new');
 	}
 	public function update($id) {
 		if (!$this->valid('contact_update')) {
@@ -87,22 +80,18 @@ class Contact extends BaseController {
 		]);
 
 		if (!$success) {
-			return redirect()->back()->withInput()->with('message', 'Kontak gagal diperbarui');
+			return redirect()->back()->withInput()->with('alert', getAlert('Kontak gagal diperbarui', true));
 		}
-		return redirect()->to('/contact/' . $id)->with('message', 'Kontak berhasil diperbarui');
+		return redirect()->to('/contact/' . $id)->with('alert', getAlert('Kontak berhasil diperbarui'));
 	}
 	public function delete() {
 		$id = $this->request->getPost('id');
 		$this->contactModel->delete($id);
 
-		$success = $this->contactModel->db->affectedRows() > 0;
-		$message = 'Kontak berhasil dihapus';
-		if (!$success) {
-			$message = 'Kontak gagal dihapus';
+		if ($this->contactModel->db->affectedRows() < 1) {
+			return redirect()->to('/')->with('alert', getAlert('Kontak gagal dihapus', true));
 		}
-		return redirect()->to('/')
-			->with('success', $success)
-			->with('message', $message);
+		return redirect()->to('/')->with('alert', getAlert('Kontak berhasil dihapus'));
 	}
 	private function valid($rule) {
 		return Services::validation()->run($this->request->getPost(), $rule);
