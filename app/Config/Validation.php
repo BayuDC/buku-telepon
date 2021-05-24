@@ -65,6 +65,14 @@ class Validation {
 		],
 		'address' => [
 			'rules' => 'permit_empty'
+		],
+		'picture' => [
+			'rules' => 'is_image[picture]|mime_in[picture,image/jpg,image/jpeg,image/png,image/gif]|max_size[picture,5120]',
+			'errors' => [
+				'is_image' => 'Foto harus berupa file gambar',
+				'mime_in' => 'Foto harus berupa file gambar',
+				'max_size' => 'Ukuran file terlalu besar',
+			]
 		]
 	];
 	public $contact_update = [

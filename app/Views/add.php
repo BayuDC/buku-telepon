@@ -59,12 +59,20 @@
                                 <input type="file" name="picture" id="picture">
                                 <input class="uk-input" type="text" placeholder="Foto..." disabled>
                             </div>
-                            <div class="uk-flex uk-flex-right margin-top-s">
-                                <button type="button" class="uk-hidden uk-button uk-button-danger" id="btn-reset-img">Buang</button>
+                            <div class="uk-flex uk-flex-right uk-hidden margin-top-s">
+                                <button type="button" class="uk-button uk-button-danger" id="btn-reset-img">Buang</button>
                             </div>
                         </div>
                         <div class="uk-margin-auto img-medium-parent">
                             <img src="" alt="" class="uk-hidden" id="img-preview">
+                        </div>
+                    </div>
+                    <div class="uk-form-controls" id="alert-picture">
+                        <input type="hidden" class="<?= $validation->hasError('picture') ? 'uk-form-danger' : '' ?> uk-input">
+                        <div class="uk-alert-danger uk-margin-remove" uk-alert>
+                            <p class="uk-text-small">
+                                <?= $validation->getError('picture') ?>
+                            </p>
                         </div>
                     </div>
                 </div>
