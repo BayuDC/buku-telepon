@@ -11,9 +11,19 @@ const inputPicture = document.getElementById('picture');
 const btnReset = document.getElementById('btn-reset-img');
 const imgPreview = document.getElementById('img-preview');
 const alertPicture = document.getElementById('alert-picture');
+const resetPicture = () => {
+    inputPicture.value = null;
+    inputPicture.nextElementSibling.value = null;
+    imgPreview.src = '';
+    imgPreview.classList.add('uk-hidden');
+    btnReset.parentElement.classList.add('uk-hidden');
+    inputPicture.parentElement.parentElement.classList.remove('uk-margin-bottom', 'margin-right-s');
+};
 inputPicture?.addEventListener('change', () => {
     const reader = new FileReader();
-    reader.readAsDataURL(inputPicture.files[0]);
+    const file = inputPicture.files[0];
+    if (!file) return resetPicture();
+    reader.readAsDataURL(file);
     reader.onload = () => {
         imgPreview.src = reader.result;
         btnReset.parentElement.classList.remove('uk-hidden');
@@ -24,11 +34,4 @@ inputPicture?.addEventListener('change', () => {
         };
     };
 });
-btnReset?.addEventListener('click', () => {
-    inputPicture.value = null;
-    inputPicture.nextElementSibling.value = null;
-    imgPreview.src = '';
-    imgPreview.classList.add('uk-hidden');
-    btnReset.parentElement.classList.add('uk-hidden');
-    inputPicture.parentElement.parentElement.classList.remove('uk-margin-bottom', 'margin-right-s');
-});
+btnReset?.addEventListener('click', resetPicture);
