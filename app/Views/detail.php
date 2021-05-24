@@ -5,7 +5,13 @@
     <div class="uk-card uk-card-default">
         <div class="uk-card-header uk-padding-small">
             <div class="uk-margin-small-top">
-                <img src="/img/<?= $contact['picture'] ?>" alt="" class="uk-display-block uk-margin-auto uk-border-circle uk-box-shadow-medium img-medium">
+                <div data-src="img/<?= $contact['picture'] ?>" class="uk-margin-auto uk-width-small uk-height-small uk-background-cover uk-border-circle" uk-img href="#modal-media-image" uk-toggle></div>
+                <div id="modal-media-image" uk-modal>
+                    <div class="uk-modal-dialog uk-margin-auto-vertical">
+                        <button class="uk-modal-close-outside" type="button" uk-close></button>
+                        <img src="img/<?= $contact['picture'] ?>">
+                    </div>
+                </div>
             </div>
             <h3 class="uk-card-title uk-text-center uk-margin-small-top"><?= $contact['name'] ?></h3>
         </div>

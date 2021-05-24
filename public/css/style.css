@@ -4,10 +4,6 @@ body {
 .img-medium-parent {
     max-width: 200px;
 }
-.img-medium {
-    width: 150px;
-    height: 150px;
-}
 .uk-input ~ .uk-alert-danger {
     display: none;
 }
