@@ -3,7 +3,7 @@
 <div class="uk-container uk-container-xsmall">
     <?= $this->include('layout/alert') ?>
     <div class="uk-card uk-card-default">
-        <form action="/save" method="post" class="uk-form-horizontal">
+        <form action="/save" method="post" enctype="multipart/form-data" class="uk-form-horizontal">
             <?= csrf_field() ?>
             <div class="uk-card-body">
                 <h3 class="uk-card-title">Tambah Kontak</h3>

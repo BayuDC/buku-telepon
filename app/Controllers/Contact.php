@@ -36,6 +36,7 @@ class Contact extends BaseController {
 		return view('add', [
 			'title' => 'Tambah Kontak',
 			'validation' => Services::validation(),
+			'temp_picture' => session()->getFlashData('picture')
 		]);
 	}
 	public function edit($id) {
@@ -51,12 +52,20 @@ class Contact extends BaseController {
 			return redirect()->to('/new')->withInput();
 		}
 
+		$pictureFile = $this->request->getFile('picture');
+		$pictureName = null;
+		if ($pictureFile->isValid()) {
+			$pictureName = $pictureFile->getRandomName();
+			$pictureFile->move('img/', $pictureName);
+		}
+
 		$contact = clear($this->request->getPost());
 		$success = $this->contactModel->save([
 			'name' => $contact['name'],
 			'phone' => removeSpace($contact['phone']),
 			'email' => emptyValue($contact['email']),
-			'address' => emptyValue($contact['address'])
+			'address' => emptyValue($contact['address']),
+			'picture' => $pictureName
 		]);
 
 		if (!$success) {
