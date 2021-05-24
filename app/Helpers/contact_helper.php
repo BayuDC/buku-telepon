@@ -1,5 +1,7 @@
 <?php
 
+use Prophecy\Doubler\Generator\Node\ReturnTypeNode;
+
 function emptyValue($str) {
     return $str == '' ? null : $str;
 }
@@ -22,4 +24,12 @@ function clear($data) {
     return array_map(function ($item) {
         return esc($item);
     }, $data);
+}
+function deleteImg($file) {
+    try {
+        unlink('img/' . $file);
+        return true;
+    } catch (Exception) {
+        return false;
+    }
 }

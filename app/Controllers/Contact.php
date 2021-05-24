@@ -96,6 +96,8 @@ class Contact extends BaseController {
 	}
 	public function delete() {
 		$id = $this->request->getPost('id');
+		$picture = $this->contactModel->find($id)['picture'];
+		deleteImg($picture);
 		$this->contactModel->delete($id);
 
 		if ($this->contactModel->db->affectedRows() < 1) {
