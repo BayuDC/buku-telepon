@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
+                <div class="uk-margin">
                     <label class="uk-form-label" for="address">Alamat</label>
                     <div class="uk-form-controls">
                         <input value="<?= old('address') ?>" class="<?= $validation->hasError('address') ? 'uk-form-danger' : '' ?> uk-input" id="address" name="address"" type=" text" placeholder="Alamat..." autocomplete="off">
@@ -51,8 +51,25 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <label class="uk-form-label" for="picture">Foto</label>
+                    <div class="uk-form-controls uk-flex uk-flex-column flex-row-s">
+                        <div class="uk-flex uk-width-expand flex-column-s">
+                            <div class="uk-width" uk-form-custom="target: true">
+                                <input type="file" name="picture" id="picture">
+                                <input class="uk-input" type="text" placeholder="Foto..." disabled>
+                            </div>
+                            <div class="uk-flex uk-flex-right margin-top-s">
+                                <button type="button" class="uk-hidden uk-button uk-button-danger" id="btn-reset-img">Buang</button>
+                            </div>
+                        </div>
+                        <div class="uk-margin-auto img-medium-parent">
+                            <img src="" alt="" class="uk-hidden" id="img-preview">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="uk-card-footer uk-padding-small">
+            <div class=" uk-card-footer uk-padding-small">
                 <div class="uk-flex uk-flex-column flex-row-s">
                     <button type="submit" class="uk-button uk-button-primary">Simpan</button>
                     <a href="/" class="uk-button uk-button-danger uk-flex-first@s uk-margin-auto-right@s">Batal</a>

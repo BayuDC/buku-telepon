@@ -6,3 +6,27 @@ const invalidInputFields = document.querySelectorAll('.uk-form-danger.uk-input')
     };
     field.addEventListener('keydown', keyDown);
 });
+
+const inputPicture = document.getElementById('picture');
+const btnReset = document.getElementById('btn-reset-img');
+const imgPreview = document.getElementById('img-preview');
+inputPicture?.addEventListener('change', () => {
+    const reader = new FileReader();
+    reader.readAsDataURL(inputPicture.files[0]);
+    reader.onload = () => {
+        imgPreview.src = reader.result;
+        btnReset.classList.remove('uk-hidden');
+        imgPreview.onload = () => {
+            imgPreview.classList.remove('uk-hidden');
+            inputPicture.parentElement.parentElement.classList.add('uk-margin-bottom', 'margin-right-s');
+        };
+    };
+});
+btnReset?.addEventListener('click', () => {
+    inputPicture.value = null;
+    inputPicture.nextElementSibling.value = null;
+    imgPreview.src = '';
+    imgPreview.classList.add('uk-hidden');
+    btnReset.classList.add('uk-hidden');
+    inputPicture.parentElement.parentElement.classList.remove('uk-margin-bottom', 'margin-right-s');
+});

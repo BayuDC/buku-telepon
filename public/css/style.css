@@ -1,6 +1,9 @@
 body {
     min-width: 280px;
 }
+.img-medium-parent {
+    max-width: 200px;
+}
 .img-medium {
     width: 150px;
     height: 150px;
@@ -16,7 +19,13 @@ body {
     .flex-row-s {
         flex-direction: row;
     }
+    .flex-column-s {
+        flex-direction: column;
+    }
     .margin-right-s {
         margin-right: 10px;
+    }
+    .margin-top-s {
+        margin-top: 10px;
     }
 }
