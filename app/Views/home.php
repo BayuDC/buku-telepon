@@ -1,6 +1,12 @@
 <?= $this->extend('layout/default') ?>
 <?= $this->section('content') ?>
 <div class="uk-container uk-container-xsmall">
+    <div class="uk-search uk-search-default uk-width-expand">
+        <div class="uk-flex">
+            <input id="input-search" value="<?= $keyword ? $keyword : '' ?>" class="uk-search-input" type="search" placeholder="Cari Kontak..." autocomplete="off">
+            <a id="btn-search" href="" class="uk-button uk-button-primary">Cari</a>
+        </div>
+    </div>
     <?= $this->include('layout/alert') ?>
     <table class="uk-table uk-table-divider uk-table-small uk-table-responsive">
         <thead>

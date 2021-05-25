@@ -12,7 +12,7 @@
 
         <?php foreach ($pager->links() as $link) : ?>
             <li>
-                <a href="/page/<?= $link['title'] ?>" class="<?= $link['active'] ? 'uk-active' : '' ?>">
+                <a href="<?= $keyword ? '/search/' . $keyword : '' ?>/page/<?= $link['title'] ?>" class="<?= $link['active'] ? 'uk-active' : '' ?>">
                     <?= $link['title'] ?>
                 </a>
             </li>

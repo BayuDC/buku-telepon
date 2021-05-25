@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Contact::index');
 $routes->get('/page/(:num)', 'Contact::index/$1');
+$routes->get('/search/(:segment)', 'Contact::index/1/$1');
+$routes->get('/search/(:segment)/page/(:num)', 'Contact::index/$2/$1');
 $routes->get('/(:num)', 'Contact::detail/$1');
 $routes->get('/(:num)/edit', 'Contact::edit/$1');
 $routes->get('/new', 'Contact::add');

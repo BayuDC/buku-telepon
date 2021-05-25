@@ -19,4 +19,7 @@ class ContactModel extends Model {
 	public function getPicture($id) {
 		return $this->find($id)['picture'];
 	}
+	public function search($keyword) {
+		return $this->table($this->table)->select()->like('name', $keyword);
+	}
 }

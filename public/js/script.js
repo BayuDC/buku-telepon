@@ -40,3 +40,14 @@ inputPicture?.addEventListener('change', () => {
     };
 });
 btnReset?.addEventListener('click', resetPicture);
+
+const inputSearch = document.getElementById('input-search');
+const btnSearch = document.getElementById('btn-search');
+const updateLink = () => btnSearch.setAttribute('href', '/search/' + inputSearch.value);
+btnSearch?.addEventListener('click', updateLink);
+inputSearch?.addEventListener('keydown', e => {
+    updateLink();
+    if (e.key == 'Enter') {
+        btnSearch.click();
+    }
+});
