@@ -34,6 +34,9 @@ inputPicture?.addEventListener('change', () => {
             imgPreview.classList.remove('uk-hidden');
             inputPicture.parentElement.parentElement.classList.add('uk-margin-bottom', 'margin-right-s');
         };
+        imgPreview.onerror = () => {
+            inputPicture.parentElement.parentElement.classList.remove('uk-margin-bottom', 'margin-right-s');
+        };
     };
 });
 btnReset?.addEventListener('click', resetPicture);

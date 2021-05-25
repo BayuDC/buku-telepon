@@ -71,7 +71,7 @@
                     </div>
                     <div class="uk-form-controls" id="alert-picture">
                         <input type="hidden" name="picture_old" value="<?= $contact['picture'] ?>" class="<?= $validation->hasError('picture') ? 'uk-form-danger' : '' ?> uk-input">
-                        <div class="uk-alert-danger uk-margin-remove" uk-alert>
+                        <div class="uk-alert-danger uk-margin-remove <?= session()->getFlashData('alert') ? 'uk-hidden' : '' ?>" uk-alert>
                             <p class="uk-text-small">
                                 <?= $validation->getError('picture') ?>
                             </p>

@@ -76,13 +76,16 @@ class Contact extends BaseController {
 	public function update() {
 		$id = $this->request->getPost('id');
 		$contact = clear($this->request->getPost());
+		$pictureDb = $this->contactModel->getPicture($id);
 		if (!validator($this->request->getPost(), 'contact_update')) {
+			if ($pictureDb) {
+				return redirect()->to("/$id/edit")->withInput()->with('alert', getAlert(Services::validation()->getError('picture'), true));
+			}
 			return redirect()->to("/$id/edit")->withInput();
 		}
 
 		$pictureFile = $this->request->getFile('picture');
 		$pictureName = $contact['picture_old'] ? $contact['picture_old'] : null;
-		$pictureDb = $this->contactModel->getPicture($id);
 		if ($pictureFile->isValid()) {
 			$pictureName = $pictureFile->getRandomName();
 			$pictureFile->move('img/', $pictureName);
