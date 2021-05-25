@@ -36,7 +36,6 @@ class Contact extends BaseController {
 		return view('add', [
 			'title' => 'Tambah Kontak',
 			'validation' => Services::validation(),
-			'temp_picture' => session()->getFlashData('picture')
 		]);
 	}
 	public function edit($id) {
@@ -76,17 +75,32 @@ class Contact extends BaseController {
 	}
 	public function update() {
 		$id = $this->request->getPost('id');
+		$contact = clear($this->request->getPost());
 		if (!validator($this->request->getPost(), 'contact_update')) {
 			return redirect()->to("/$id/edit")->withInput();
 		}
 
-		$contact = clear($this->request->getPost());
+		$pictureFile = $this->request->getFile('picture');
+		$pictureName = $contact['picture_old'] ? $contact['picture_old'] : null;
+		$pictureDb = $this->contactModel->getPicture($id);
+		if ($pictureFile->isValid()) {
+			$pictureName = $pictureFile->getRandomName();
+			$pictureFile->move('img/', $pictureName);
+			if ($pictureDb) {
+				deleteImg($pictureDb);
+			}
+		}
+		if ($pictureDb && !$pictureName) {
+			deleteImg($pictureDb);
+		}
+
 		$success = $this->contactModel->save([
 			'id' => $id,
 			'name' => $contact['name'],
 			'phone' => removeSpace($contact['phone']),
 			'email' => emptyValue($contact['email']),
-			'address' => emptyValue($contact['address'])
+			'address' => emptyValue($contact['address']),
+			'picture' => $pictureName
 		]);
 
 		if (!$success) {

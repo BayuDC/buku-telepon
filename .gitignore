@@ -128,3 +128,4 @@ nb-configuration.xml
 *.session.sql
 public/img/*
 !public/img/default.jpg
+note.txt

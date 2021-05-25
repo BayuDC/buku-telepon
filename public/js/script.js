@@ -11,10 +11,12 @@ const inputPicture = document.getElementById('picture');
 const btnReset = document.getElementById('btn-reset-img');
 const imgPreview = document.getElementById('img-preview');
 const alertPicture = document.getElementById('alert-picture');
+const oldPicture = document.getElementsByName('picture_old')[0];
 const resetPicture = () => {
     inputPicture.value = null;
     inputPicture.nextElementSibling.value = null;
     imgPreview.src = '';
+    oldPicture?.setAttribute('value', '');
     imgPreview.classList.add('uk-hidden');
     btnReset.parentElement.classList.add('uk-hidden');
     inputPicture.parentElement.parentElement.classList.remove('uk-margin-bottom', 'margin-right-s');
