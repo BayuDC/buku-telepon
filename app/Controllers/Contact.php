@@ -12,10 +12,10 @@ class Contact extends BaseController {
 	public function __construct() {
 		$this->contactModel = new ContactModel();
 	}
-	public function index() {
+	public function index($page = 1) {
 		return view('home', [
 			'title' => 'Buku Telepon',
-			'contacts' => $this->contactModel->paginate(10, 'contact_group'),
+			'contacts' => $this->contactModel->paginate(10, 'contact_group', $page),
 			'pager' => $this->contactModel->pager,
 		]);
 	}
