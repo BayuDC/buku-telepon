@@ -9,10 +9,7 @@ class ContactModel extends Model {
 	protected $primaryKey           = 'id';
 	protected $useTimestamps        = true;
 	protected $allowedFields 		= ['name', 'phone', 'email', 'address', 'picture'];
-	public function getContact($id = 0) {
-		if ($id == 0) {
-			return $this->findAll();
-		}
+	public function getContact($id) {
 		return $this->find($id);
 	}
 	public function getLastId() {

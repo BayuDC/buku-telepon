@@ -15,7 +15,8 @@ class Contact extends BaseController {
 	public function index() {
 		return view('home', [
 			'title' => 'Buku Telepon',
-			'contacts' => $this->contactModel->getContact(),
+			'contacts' => $this->contactModel->paginate(10, 'contact_group'),
+			'pager' => $this->contactModel->pager,
 		]);
 	}
 	public function detail($id) {

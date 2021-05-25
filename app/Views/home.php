@@ -13,13 +13,14 @@
         <tbody>
             <?php foreach ($contacts as $index => $contact) : ?>
                 <tr>
-                    <td class="uk-visible@m"><?= $index + 1 ?></td>
+                    <td class="uk-visible@m"><?= ($pager->getCurrentPage('contact_group') - 1) * 10 + $index + 1 ?></td>
                     <td><a href="/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['name'] ?></a></td>
                     <td><a href="/<?= $contact['id'] ?>" class="uk-text-secondary"><?= $contact['phone'] ?></a></td>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
+    <?= $pager->links('contact_group', 'contact_pagination') ?>
 </div>
 <div class="uk-position-fixed uk-position-bottom-right uk-position-small">
     <a class="uk-button uk-button-primary" href="/new">
